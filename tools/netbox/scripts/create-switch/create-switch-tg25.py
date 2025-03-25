@@ -334,10 +334,12 @@ class CreateSwitch(Script):
         )
         v4_mgmt_addr = IPAddress.objects.create(
             address=FABRIC_V4_JUNIPER_MGMT_PREFIX.get_first_available_ip(),
+            vrf=FABRIC_INET_VRF,
             dns_name=f"{switch.name}.{DEFAULT_TG_DNS_SUFFIX}"
         )
         v6_mgmt_addr = IPAddress.objects.create(
             address=FABRIC_V6_JUNIPER_MGMT_PREFIX.get_first_available_ip(),
+            vrf=FABRIC_INET_VRF,
             dns_name=f"{switch.name}.{DEFAULT_TG_DNS_SUFFIX}"
         )
         mgmt_vlan_interface.ip_addresses.add(v4_mgmt_addr)
