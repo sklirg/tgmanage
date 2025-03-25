@@ -331,7 +331,7 @@ class CreateSwitch(Script):
             description=f'X: Mgmt',
             type=InterfaceTypeChoices.TYPE_VIRTUAL,
             mode=InterfaceModeChoices.MODE_ACCESS,
-            vid=FABRIC_V4_JUNIPER_MGMT_PREFIX.vlan.vid,
+            untagged_vlans=FABRIC_V4_JUNIPER_MGMT_PREFIX.vlan.vid,
         )
         v4_mgmt_addr = IPAddress.objects.create(
             address=FABRIC_V4_JUNIPER_MGMT_PREFIX.get_first_available_ip(),
