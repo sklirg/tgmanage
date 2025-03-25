@@ -48,18 +48,13 @@ FABRIC_CLIENTS_ROLE = Role.objects.get(slug='clients')
 # VRF for fabric clients
 FABRIC_CLIENTS_VRF = VRF.objects.get(name='CLIENTS')
 
-# Client and MGMT VRF object
-CLIENTS_VRF = VRF.objects.filter(name="CLIENTS")
-JUNIPER_MGMT_VRF = VRF.objects.filter(name="JUNIPER_MGMT")
-
-
 # Client networks allocated from here
-FABRIC_V4_CLIENTS_PREFIX = Prefix.objects.filter(prefix='10.25.0.0/16', vrf__in=CLIENTS_VRF)
-FABRIC_V6_CLIENTS_PREFIX = Prefix.objects.filter(prefix='2a06:5844:e::/48', vrf__in=CLIENTS_VRF)
+FABRIC_V4_CLIENTS_PREFIX = Prefix.objects.get(prefix='10.25.0.0/16')
+FABRIC_V6_CLIENTS_PREFIX = Prefix.objects.get(prefix='2a06:5844:e::/48')
 
 # Switch mgmt allocates from here
-FABRIC_V4_JUNIPER_MGMT_PREFIX = Prefix.objects.filter(prefix='185.110.149.0/25', vrf__in=JUNIPER_MGMT_VRF)
-FABRIC_V6_JUNIPER_MGMT_PREFIX = Prefix.objects.filter(prefix='2a06:5841:f::/64', vrf__in=JUNIPER_MGMT_VRF)
+FABRIC_V4_JUNIPER_MGMT_PREFIX = Prefix.objects.get(prefix='185.110.149.0/25')
+FABRIC_V6_JUNIPER_MGMT_PREFIX = Prefix.objects.get(prefix='2a06:5841:f::/64')
 
 ## TODO support 1G uplinks on EX3300
 UPLINK_PORTS = {
