@@ -327,7 +327,7 @@ class CreateSwitch(Script):
 
         mgmt_vlan_interface = Interface.objects.create(
             device=switch,
-            name=f"{mgmt_interface_name}.{FABRIC_V4_JUNIPER_MGMT_PREFIX.vlan.id}",
+            name=f"{mgmt_interface_name}.{FABRIC_V4_JUNIPER_MGMT_PREFIX.vlan.vid}",
             description=f'X: Mgmt',
             type=InterfaceTypeChoices.TYPE_VIRTUAL,
             mode=InterfaceModeChoices.MODE_TAGGED,
