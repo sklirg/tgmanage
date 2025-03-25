@@ -48,13 +48,16 @@ FABRIC_CLIENTS_ROLE = Role.objects.get(slug='clients')
 # VRF for fabric clients
 FABRIC_CLIENTS_VRF = VRF.objects.get(name='CLIENTS')
 
+# VRF for internet clients on the fabric
+FABRIC_INET_VRF = VRF.objects.get(name='INET')
+
 # Client networks allocated from here
-FABRIC_V4_CLIENTS_PREFIX = Prefix.objects.get(prefix='10.25.0.0/16')
-FABRIC_V6_CLIENTS_PREFIX = Prefix.objects.get(prefix='2a06:5844:e::/48')
+FABRIC_V4_CLIENTS_PREFIX = Prefix.objects.get(prefix__family=4, prefix='10.25.0.0/16', vrf=FABRIC_CLIENTS_VRF)
+FABRIC_V6_CLIENTS_PREFIX = Prefix.objects.get(prefix__family=6, prefix='2a06:5844:e::/48', vrf=FABRIC_CLIENTS_VRF)
 
 # Switch mgmt allocates from here
-FABRIC_V4_JUNIPER_MGMT_PREFIX = Prefix.objects.get(prefix='185.110.149.0/25')
-FABRIC_V6_JUNIPER_MGMT_PREFIX = Prefix.objects.get(prefix='2a06:5841:f::/64')
+FABRIC_V4_JUNIPER_MGMT_PREFIX = Prefix.objects.get(prefix__family=4, prefix='185.110.149.0/25', vrf=FABRIC_INET_VRF)
+FABRIC_V6_JUNIPER_MGMT_PREFIX = Prefix.objects.get(prefix__family=6, prefix='2a06:5841:f::/64', vrf=FABRIC_INET_VRF)
 
 ## TODO support 1G uplinks on EX3300
 UPLINK_PORTS = {
@@ -332,7 +335,6 @@ class CreateSwitch(Script):
         v4_mgmt_addr = IPAddress.objects.create(
             address=FABRIC_V4_JUNIPER_MGMT_PREFIX.get_first_available_ip(),
             dns_name=f"{switch.name}.{DEFAULT_TG_DNS_SUFFIX}"
-
         )
         v6_mgmt_addr = IPAddress.objects.create(
             address=FABRIC_V6_JUNIPER_MGMT_PREFIX.get_first_available_ip(),
