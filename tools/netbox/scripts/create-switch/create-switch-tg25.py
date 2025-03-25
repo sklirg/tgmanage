@@ -32,7 +32,7 @@ DEFAULT_SITE = Site.objects.get(name='Vikingskipet')
 DEFAULT_DEVICE_TYPE = DeviceType.objects.get(model='EX2200-48T-4G')
 DEFAULT_DEVICE_ROLE = DeviceRole.objects.get(slug='access-switch')
 DEFAULT_TG_DNS_SUFFIX = "tg25.tg.no"
-DEFAULT_UPLINK_SWITCH = Device.objects.get(name='d1.ring')
+DEFAULT_UPLINK_SWITCH = Device.objects.get(name='d1-ring-noc')
 
 DEVICE_ROLE_ACCESS = "access-switch"
 DEVICE_ROLE_DISTRO = "distro"
